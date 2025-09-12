@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enter Notification</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f3f4f6;padding:30px;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;}
+    .card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,0.08);width:360px;}
+    label{display:block;font-size:13px;margin-top:12px;color:#334155}
+    input{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;margin-top:6px;font-size:15px}
+    .btn{margin-top:16px;padding:10px 12px;border-radius:8px;border:0;background:#1473ff;color:#fff;font-weight:600;cursor:pointer}
+    .note{font-size:13px;color:#61748a;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h3>Send test notification</h3>
+    <form id="notifForm">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" required>
+
+      <label for="amount">Amount (KSH)</label>
+      <input id="amount" name="amount" type="text" placeholder="e.g. 6,500.00" required>
+
+      <label for="phone">Phone number</label>
+      <input id="phone" name="phone" type="tel" placeholder="+254712345678" required>
+
+      <label for="time">Time</label>
+      <input id="time" name="time" type="text" placeholder="08:29 pm" required>
+
+      <button class="btn" type="submit">Open Notification</button>
+      <div class="note">This will open the notification page and display the values you entered. The Account shown is the last 4 digits of the phone number.</div>
+    </form>
+  </div>
+<script>
+document.getElementById('notifForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name=encodeURIComponent(document.getElementById('name').value.trim());
+  const amount=encodeURIComponent(document.getElementById('amount').value.trim());
+  const phone=encodeURIComponent(document.getElementById('phone').value.trim());
+  const time=encodeURIComponent(document.getElementById('time').value.trim());
+  window.location.href=`index.html?name=${name}&amount=${amount}&phone=${phone}&time=${time}`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notification</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="notif-wrap" role="dialog" aria-label="Payment notification">
+    <div class="notif-header">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="brand">
+          <div class="logo">T</div>
+          <div class="title">truecaller</div>
+        </div>
+        <div style="margin-left:8px; font-size:12px; color:rgba(255,255,255,0.95); opacity:.9;">
+          <span class="meta">SMS · <span id="timeLabel">--:--</span></span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;">
+        <button class="close-btn" aria-label="close" id="closeBtn">✕</button>
+      </div>
+    </div>
+
+    <div class="notif-body">
+      <div class="mpesa-logo" aria-hidden="true">
+        <!-- Using local M-PESA logo image provided by user -->
+        <img id="mpesaLogoImg" src="mpesa_logo.png" alt="MPESA" />
+      </div>
+      <div class="body-content">
+        <div style="font-size:13px;color:#667085;font-weight:600;">MPESA</div>
+        <div class="amount" id="amountLabel">- KSH <span id="amountValue">0</span></div>
+        <!--
+          ACCOUNT DISPLAY: DEACTIVATED
+          The account last-4 display is intentionally deactivated. No digits are shown.
+          To reactivate showing the last 4 digits of the phone number, open script.js and
+          uncomment the line marked "REACTIVATE-LAST4" (search for that tag).
+        -->
+        <p class="desc" id="paidTo">Paid to <strong id="supplierName">---</strong> from Account <strong id="acct">&nbsp;&nbsp;&nbsp;&nbsp;</strong></p>
+        <div class="actions">
+          <div class="action-left">
+            <button class="btn secondary" id="markRead">Mark as read</button>
+          </div>
+          <div>
+            <button class="btn" id="viewProfile">View profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
