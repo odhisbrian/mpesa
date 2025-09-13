@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notification</title>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="notif-wrap" role="dialog" aria-label="Payment notification">
+
+    <!-- HEADER -->
+    <header class="notif-header" role="banner">
+      <!-- Left: brand / truecaller -->
+      <div class="brand" aria-hidden="false">
+        <div class="title">truecaller</div>
+      </div>
+
+      <!-- Centered meta (SMS · time) - absolutely centered in header -->
+      <span class="meta" aria-hidden="false">SMS · <span id="timeLabel">--:--</span></span>
+
+      <!-- Right: close button -->
+      <div class="right-controls" aria-hidden="false">
+        <button class="close-btn" aria-label="Close notification" id="closeBtn">✕</button>
+      </div>
+    </header>
+
+    <!-- WHITE CONTENT AREA -->
+    <main class="notif-body" role="region" aria-label="Payment details">
+      <!-- top-content: logo and title on same row, amount + paid-to below -->
+      <div class="top-content">
+        <div class="top-row">
+          <div class="mpesa-logo" aria-hidden="true">
+            <!-- local file expected: mpesa_logo.png or mpesa_logo.svg in same folder -->
+            <img id="mpesaLogoImg" src="mpesa_logo.png" alt="M-PESA logo" />
+          </div>
+
+          <!-- MPESA title immediately to the right of the logo -->
+          <div class="mpesa-title" id="mpesaText">MPESA</div>
+        </div>
+
+        <!-- Amount immediately below the logo+title row -->
+        <div class="amount" id="amountLabel">- KSH <span id="amountValue">0</span></div>
+
+        <!-- Paid-to text under amount; account remains deactivated/hidden -->
+        <p class="desc" id="paidTo">
+          Paid to <strong id="supplierName">---</strong>
+          <!-- ACCOUNT DISPLAY: DEACTIVATED -->
+          <!-- The acct element is present for traceability but intentionally NOT shown.
+               To REACTIVATE the last-4 display:
+               1) In script.js uncomment the line marked "REACTIVATE-LAST4".
+               2) Remove or change the `.from-account { color: transparent; }` rule in style.css.
+          -->
+          <span class="from-account">from Account <strong id="acct">&nbsp;&nbsp;&nbsp;&nbsp;</strong></span>
+        </p>
+      </div>
+
+      <!-- Actions area (full-width light-blue band inside the white card) -->
+      <div class="actions-cta" role="group" aria-label="Notification actions">
+        <button class="cta-btn" id="markRead" type="button">Mark as read</button>
+        <button class="cta-btn" id="viewProfile" type="button">View profile</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
