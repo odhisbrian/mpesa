@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Pay with M-PESA</title>
+</head>
+<body>
+  <h2>Enter your M-PESA number</h2>
+  <input id="phone" placeholder="+2547XXXXXXXX" />
+  <button id="payBtn">Pay</button>
+
+  <script>
+    document.getElementById('payBtn').addEventListener('click', async () => {
+      const phone = document.getElementById('phone').value.trim();
+      if (!phone) return alert('Enter phone number');
+      try {
+        const res = await fetch('/api/pay', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ phone })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alert('STK Push sent — check your phone and enter your M-PESA PIN.');
+        } else {
+          alert('Payment request failed: ' + (data.error || res.status));
+        }
+      } catch (e) {
+        alert('Network error: ' + e.message);
+      }
+    });
+  </script>
+</body>
+</html>
