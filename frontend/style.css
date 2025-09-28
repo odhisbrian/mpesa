@@ -1,0 +1,242 @@
+/* =========================
+   Complete style.css
+   Includes: inset white panel with rounded corners, full-bleed CTA band,
+   left-aligned MPESA content, centered SMS meta, slim header adjustments.
+   ========================= */
+
+/* Base layout */
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f0f2f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  margin:0;
+  padding:20px;
+}
+
+/* ========== OUTER WRAPPER ==========
+   Gradient moved here so it can show as a band around the white panel.
+   The wrapper has padding so the inner white panel sits inset.
+   ========== */
+.notif-wrap{
+  width:420px;
+  max-width:100%;
+  border-radius:18px;                 /* outer rounding */
+  box-shadow:0 10px 30px rgba(2,6,23,0.12);
+  overflow:visible;
+  background: linear-gradient(180deg,#1473ff 0%, #0f5fd6 100%); /* show blue around white panel */
+  padding:12px;                        /* space so inner white panel sits inset */
+  box-sizing: border-box;
+}
+
+/* ========== HEADER ==========
+   Header made transparent so gradient from wrapper shows behind.
+   The .meta element is absolutely centered between left and right items.
+   Slim header sizing applied.
+   ========== */
+.notif-header{
+  position: relative;       /* allow absolute centering of .meta */
+  display:flex;
+  align-items:center;
+  padding:1px 10px;         /* reduced padding for slimmer header */
+  color:#fff;
+  background: transparent;   /* transparent so wrapper gradient shows */
+  min-height:28px;          /* reduced height */
+  border-radius: 8px;        /* subtle rounding */
+}
+
+/* Brand on the left */
+.brand{
+  position: relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+}
+.title{
+  font-size:16px;
+  line-height:1;
+  font-weight:600;
+  text-transform: none;
+  color: #fff;
+}
+
+/* Close (right) stays in flow on right */
+.right-controls{
+  position: relative;
+  z-index:2;
+  margin-left:auto;
+}
+.close-btn{
+  background:rgba(255,255,255,0.03);
+  color:white;
+  border:0;
+  width:25px;
+  height:25px;
+  border-radius:7px;
+  cursor:pointer;
+  display:inline-grid;
+  place-items:center;
+  font-size:14px;
+}
+
+/* Center only the SMS/time label without affecting left/right items */
+.notif-header .meta {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  pointer-events: none; /* allow clicks to pass to left/right elements */
+  color: rgba(255,255,255,0.95);
+  font-size:13px;
+  z-index:1;
+  max-width:60%;
+  text-align:center;
+}
+
+/* ========== WHITE CONTENT PANEL ==========
+   The inner white panel is rounded, with a blue border matching header.
+   It sits inset within the gradient wrapper so you see the blue band.
+   Note: bottom padding set to 0 so CTA band can be flush.
+   ========== */
+.notif-body{
+  width:100%;
+  background:#fff;
+  color:#0b1320;
+  padding:18px 18px 0 18px;   /* bottom padding = 0 to allow CTA flush to bottom */
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:flex-start;
+  border: px solid #1473ff;  /* blue border matching header */
+  border-radius:12px;         /* rounded corners for the white panel */
+  box-sizing:border-box;
+  position: relative;
+}
+
+/* top-content: left-aligned block containing logo+title row and text below */
+.top-content{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+  padding-left:6px; /* small inset from the inner panel border */
+  box-sizing:border-box;
+}
+
+/* Row that contains logo and the MPESA title to its right */
+.top-row{
+  display:flex;
+  align-items:center;
+  gap:12px;            /* space between logo and title */
+  width:100%;
+}
+
+/* mpesa logo square (left) - adjust width/height here to change box size */
+.mpesa-logo{
+  width:48px;         /* <-- change these values to shrink/grow the logo box */
+  height:35px;
+  border-radius:8px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #fff;
+  box-shadow:0 1px 2px rgba(0,0,0,0.04);
+  flex: 0 0 auto;
+}
+
+/* keep image size consistent - adjust to match mpesa-logo dimensions */
+.mpesa-logo img{
+  max-width:40px;    /* match to slightly smaller than logo box */
+  max-height:40px;
+  display:block;
+}
+
+/* MPESA title to the right of the logo */
+.mpesa-title{
+  font-size:15px;
+  color:#667085; /* same as .desc */
+  font-weight:600;
+  margin:0;
+}
+
+/* Amount immediately under the logo+title row */
+.amount{
+  font-size:22px;
+  font-weight:700;
+  color:#ff7a00;
+  margin-top:10px; /* space below the top-row */
+  margin-bottom:6px;
+}
+
+/* Paid-to text under amount, left aligned */
+.desc{
+  color:#667085;
+  font-size:14px;
+  margin:0 0 6px 0;
+}
+
+/* Keep account visually hidden (deactivated) — no visible digits */
+/* To REACTIVATE, remove or change this rule and uncomment REACTIVATE-LAST4 in script.js */
+.from-account{
+  color: transparent;
+  user-select: none;
+}
+
+/* ========== ACTIONS CTA (full-bleed light-blue band flush to bottom) ==========
+   We pull the band full-width inside the white panel by using negative margins
+   equal to the horizontal padding of .notif-body (18px).
+   We also set bottom corners rounding to match the white panel.
+   ========== */
+.actions-cta{
+  width: calc(100% + 36px);    /* 36px = left + right padding of .notif-body (18 + 18) */
+  margin-left: -18px;          /* pull left to panel edge */
+  margin-right: -18px;         /* pull right to panel edge */
+  padding:12px 18px;           /* internal padding for the band */
+  background: rgba(20,115,255,0.06); /* light-blue band */
+  border-radius: 0 0 10px 10px; /* round bottom corners */
+  box-sizing: border-box;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* Buttons appear as tiles across the band, blue text and transparent background */
+.cta-btn{
+  flex:1;
+  padding:10px 12px;
+  border-radius:8px;
+  border:0;
+  background: transparent;
+  color: #57B9FF;     /* blue text */
+  font-weight:600;
+  cursor:pointer;
+  box-shadow: none;
+  text-align:center;
+  margin:0;           /* ensure no extra spacing */
+}
+
+/* hover */
+.cta-btn:hover{
+  background: rgba(20,115,255,0.08);
+}
+
+/* responsive: stack the CTA buttons on small screens while staying full-bleed */
+@media (max-width:420px){
+  .actions-cta{
+    width: calc(100% + 36px);
+    margin-left: -18px;
+    margin-right: -18px;
+    flex-direction:column;
+    gap:8px;
+    padding:10px 18px;
+  }
+  .cta-btn{ width:100%; }
+}

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Redirecting to form…</title>
+  <meta name="robots" content="noindex">
+  <script>
+    (function(){
+      const q = window.location.search || '';
+      const h = window.location.hash || '';
+      const target = './form.html' + q + h;
+      window.location.replace(target);
+    })();
+  </script>
+</head>
+<body>
+  Redirecting to the form... If you are not redirected, <a id="link" href="./form.html">click here</a>.
+  <script>
+    // set fallback link to include query/hash too
+    document.getElementById('link').href = './form.html' + (location.search || '') + (location.hash || '');
+  </script>
+</body>
+</html>

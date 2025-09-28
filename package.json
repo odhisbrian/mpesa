@@ -1,0 +1,19 @@
+{
+  "name": "mpesa",
+  "version": "1.0.0",
+  "description": "Short description: Web login -> WhatsApp agent onboarding -> manual MPesa verification -> agent generates dynamic access link.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
