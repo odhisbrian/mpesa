@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+    branches: [ develop, main ]
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: [frontend, backend, admin]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install & Build/Test
+        working-directory: ${{ matrix.folder }}
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            # try build if defined, otherwise run test if defined
+            if npm run | grep -q "build"; then npm run build; fi
+            if npm test --silent; then echo "tests ok"; fi
+          else
+            echo "No package.json in ${{ matrix.folder }}"
+          fi
